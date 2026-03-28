@@ -40,29 +40,22 @@ async function startNewGame() {
     difficulty
   });
 
-  board = result.state["1"] || result.state.board || result.state.Board || result.state.board;
-  currentPlayer = 'white';
+  board = result.board;
+  currentPlayer = result.currentPlayer;
   selected = null;
   legalMoves = [];
   gameOver = false;
   winnerEl.textContent = '-';
   gameStatusEl.textContent = 'playing';
-  normalizeBoardAfterProlog(result.state);
+
   renderBoard();
-   if (mode === 'ai_ai') {
+
+  if (mode === 'ai_ai') {
     runAutoplay();
   }
 }
 
-function normalizeBoardAfterProlog(stateObj) {
-  if (Array.isArray(stateObj.board)) {
-    board = stateObj.board;
-  } else if (Array.isArray(stateObj[0])) {
-    board = stateObj[0];
-  } else if (Array.isArray(stateObj)) {
-    board = stateObj[0];
-  }
-}
+
 
 function renderBoard() {
   const size = board.length;
@@ -110,6 +103,11 @@ async function handleCellClick(row, col) {
       board: convertBoardForBackend(board),
       player: currentPlayer
     });
+    if (!result.ok || !result.moves) {
+      console.error('legal_moves failed', result);
+      return;
+    }
+
     legalMoves = result.moves.filter(m => m.fromRow === row && m.fromCol === col);
     renderBoard();
     return;
