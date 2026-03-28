@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breakthrough</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="sidebar">
+      <h1>Breakthrough</h1>
+
+      <label>Режим</label>
+      <select id="modeSelect">
+        <option value="human_human">Людина vs Людина</option>
+        <option value="human_ai">Людина vs Prolog</option>
+        <option value="ai_ai">Prolog vs Prolog</option>
+      </select>
+
+      <label>Розмір поля</label>
+      <select id="sizeSelect">
+        <option value="6">6x6</option>
+        <option value="8" selected>8x8</option>
+      </select>
+
+      <label>Складність</label>
+      <select id="difficultySelect">
+        <option value="easy">Easy (2 ply)</option>
+        <option value="medium" selected>Medium (4 ply)</option>
+        <option value="hard">Hard (6 ply)</option>
+      </select>
+
+      <div class="buttons">
+        <button id="newGameBtn">Нова гра</button>
+        <button id="surrenderBtn">Здатися</button>
+        <button id="endGameBtn">Завершити гру</button>
+        <button id="autoBtn">AI autoplay</button>
+      </div>
+
+      <div class="status">
+        <p><strong>Поточний гравець:</strong> <span id="currentPlayer">white</span></p>
+        <p><strong>Статус:</strong> <span id="gameStatus">playing</span></p>
+        <p><strong>Переможець:</strong> <span id="winner">-</span></p>
+      </div>
+    </div>
+
+    <div class="board-area">
+      <div id="board" class="board"></div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
